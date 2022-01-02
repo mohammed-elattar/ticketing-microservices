@@ -1,3 +1,5 @@
+import express from 'express';
+import 'express-async-errors';
 import { NotFoundError } from "./errors/not-found-error";
 import { errorHandler } from "./middlewares/error-handler";
 import { currentUserRouter } from "./routes/current-user";
@@ -5,7 +7,6 @@ import { signinRouter } from "./routes/signin";
 import { signoutRouter } from "./routes/signout";
 import { signupRouter } from "./routes/signup";
 
-const express = require('express')
 const app = express()
 const port = 3000
 
@@ -15,7 +16,7 @@ app.use(signoutRouter);
 app.use(signupRouter);
 app.use(errorHandler);
 
-app.all('*', () => {
+app.all('*', async (req, res) => {
     throw new NotFoundError();
 })
 
