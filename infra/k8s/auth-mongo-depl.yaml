@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongo-auth-depl
+  name: auth-mongo-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mongo-auth
+      app: auth-mongo
   template:
     metadata:
       labels:
-        app: mongo-auth
+        app: auth-mongo
     spec:
       containers:
-      - name: mongo-auth
+      - name: auth-mongo
         image: mongo
 
 ---
@@ -21,12 +21,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongo-auth-srv
+  name: auth-mongo-srv
 spec:
   selector:
-    app: mongo-auth
+    app: auth-mongo
   ports:
-    - name: mongo-auth
+    - name: auth-mongo
       protocol: TCP
       port: 27017
       targetPort: 27017
