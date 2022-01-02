@@ -1,3 +1,4 @@
+import { NotFoundError } from "./errors/not-found-error";
 import { errorHandler } from "./middlewares/error-handler";
 import { currentUserRouter } from "./routes/current-user";
 import { signinRouter } from "./routes/signin";
@@ -13,6 +14,10 @@ app.use(signinRouter);
 app.use(signoutRouter);
 app.use(signupRouter);
 app.use(errorHandler);
+
+app.all('*', () => {
+    throw new NotFoundError();
+})
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
