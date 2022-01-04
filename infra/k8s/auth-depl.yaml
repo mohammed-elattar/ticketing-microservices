@@ -15,7 +15,12 @@ spec:
       containers:
       - name: auth
         image: mseel3ttar/auth
-
+        env: 
+          - name: JWT_KEY
+            valueFrom: 
+              secretKeyRef:
+                name: jwt-secret
+                key: JWT_KEY
 ---
 
 apiVersion: v1
