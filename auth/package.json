@@ -26,5 +26,12 @@
     "mongoose": "^6.1.4",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.5.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "@types/supertest": "^2.0.11",
+    "jest": "^27.4.7",
+    "mongodb-memory-server": "^8.1.0",
+    "supertest": "^6.1.6"
   }
 }
