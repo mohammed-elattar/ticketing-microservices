@@ -10,6 +10,23 @@ describe('POST /api/users/signup', function() {
         .send({email: 'test@test.com', password: 'asdfghjkl'})
         .expect(201, done);
     });
+
+    it('duplicate email', function() {
+        request(app)
+          .post('/api/users/signup')
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .send({email: 'test@test.com', password: 'asdfghjkl'})
+          .expect(201);
+
+          request(app)
+          .post('/api/users/signup')
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .send({email: 'test@test.com', password: 'asdfghjkl'})
+          .expect(400);
+      });
+
     it('invalid email', function(done) {
       request(app)
         .post('/api/users/signup')
