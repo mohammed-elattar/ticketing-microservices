@@ -3,14 +3,7 @@ import app from '../../app';
 
 describe('POST /api/users/current-user', function() {
     it('responds with details about the current user', async function() {
-        const authResponse = await request(app)
-        .post('/api/users/signup')
-        .set('Accept', 'application/json')
-        .expect('Content-Type', /json/)
-        .send({email: 'test@test.com', password: 'asdfghjkl'})
-        .expect(201);
-        
-        const cookie = authResponse.get('Set-Cookie');
+        const cookie = await global.signIn()
         
         const response = await request(app)
         .get('/api/users/currentuser')
