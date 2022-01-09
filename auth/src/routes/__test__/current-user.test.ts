@@ -12,4 +12,11 @@ describe('POST /api/users/current-user', function() {
         .expect(200);
         expect(response.body.currentUser.email).toEqual('test@test.com');
     });
+
+    it('responds with null if no signed in user', async function() {
+        await request(app)
+        .get('/api/users/currentuser')
+        .set('Accept', 'application/json')
+        .expect(401);
+    });
   });
