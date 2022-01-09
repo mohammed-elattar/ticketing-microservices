@@ -32,7 +32,6 @@ router.post(
 
         req.session = {jwt: userJwt};
 
-        console.log(process.env.NODE_ENV);
       res.status(201).send(user);
   }
 );

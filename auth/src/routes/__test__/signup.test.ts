@@ -67,7 +67,7 @@ describe('POST /api/users/signup', function() {
           .expect('Content-Type', /json/)
           .send({email: 'test@test.com', password: 'asdfghjkl'})
           .expect(201);
-          console.log(response.get('Set-Cookie'));
+          
           expect(response.get('Set-Cookie')).toBeDefined();
       });
   });
