@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(cookieSession({
     //prevent hashing as the jwt which is going to be saved inside the cookie is already hashed
     signed: false,
-    secure: true
+    secure: process.env.NODE_ENV !== 'test'
 }))
 app.use(currentUserRouter);
 app.use(signinRouter);

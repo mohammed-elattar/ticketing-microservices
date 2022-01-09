@@ -23,7 +23,6 @@ router.post(
 
       const existingUser = await User.findOne({email});
         if(existingUser) {
-            console.log('user');
             throw new BadRequestError('user already exist');
         }
         const user = User.build({email, password: userPassword});
@@ -32,6 +31,8 @@ router.post(
         const userJwt = jwt.sign({id: user.id, email: user.email}, process.env.JWT_KEY!);
 
         req.session = {jwt: userJwt};
+
+        console.log(process.env.NODE_ENV);
       res.status(201).send(user);
   }
 );

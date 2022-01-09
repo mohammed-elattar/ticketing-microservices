@@ -59,4 +59,15 @@ describe('POST /api/users/signup', function() {
         .send({email: 'test@test.com'})
         .expect(400, done);
     });
+
+    it('sets a cookie after a successful signup', async function() {
+        const response = await request(app)
+          .post('/api/users/signup')
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .send({email: 'test@test.com', password: 'asdfghjkl'})
+          .expect(201);
+          console.log(response.get('Set-Cookie'));
+          expect(response.get('Set-Cookie')).toBeDefined();
+      });
   });
