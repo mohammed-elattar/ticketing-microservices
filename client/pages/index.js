@@ -1,15 +1,17 @@
 import React from 'react';
+import axios from 'axios';
+import buildClient from '../api/build-client';
 
-const LandingPage = () => {
+const LandingPage = ({ currentUser }) => {
+  console.log(currentUser);
   return <div>Mohammed Elattar</div>;
 };
 
-LandingPage.getInitialProps = async () => {
-  if (typeof window === undefined) {
-    // we are on the server and the request should be made to ingress service
-  } else {
-    // we are on the client and the request can be made to the '/api' directly
-  }
+LandingPage.getInitialProps = async (context) => {
+  const client = buildClient(context);
+  const { data } = await client.get('/api/users/currentuser');
+
+  return data;
 };
 
 export default LandingPage;
