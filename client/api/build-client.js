@@ -5,7 +5,7 @@ const buildClient = ({ req }) => {
     baseURL:
       typeof window === 'undefined'
         ? 'http://ingress-nginx-controller.ingress-nginx.svc.cluster.local'
-        : '/',
+        : '',
     headers: req?.headers,
   });
 };

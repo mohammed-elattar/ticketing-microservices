@@ -6,7 +6,7 @@ const signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { doRequest, errors } = useRequest({
-    url: '/api/users/signin',
+    url: '/api/users/signup',
     method: 'post',
     body: {
       email,
@@ -43,7 +43,7 @@ const signup = () => {
       </div>
       {errors}
       <button type='submit' className='btn btn-primary'>
-        Login
+        Submit
       </button>
     </form>
   );
