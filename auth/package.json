@@ -18,7 +18,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@mseel3ttar/common": "^1.0.4",
+    "@mseel3ttar/common": "^1.0.5",
     "@types/bcryptjs": "^2.4.2",
     "@types/cookie-session": "^2.0.44",
     "@types/express": "^4.17.13",

@@ -1,11 +1,14 @@
+import { requireAuth } from '@mseel3ttar/common';
 import express, { Request, Response } from 'express';
 
-const router = express.Router();
+const createTicketRouter = express.Router();
 
-router.post(
+createTicketRouter.post(
     '/api/tickets',
+    requireAuth
+    ,
     async (req: Request, res: Response) => {
         res.sendStatus(200);
     });
 
-export { router as createTicketRouter };
+export default createTicketRouter;
