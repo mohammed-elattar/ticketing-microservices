@@ -1,12 +1,11 @@
+import  jwt  from 'jsonwebtoken';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
-import request from 'supertest';
-import app from '../app';
 
 let mongo: any;
 
 declare global {
-    var signIn: () => Promise<string[]>;
+    var signIn: () => string[];
 }
 
 export const user =  {
@@ -35,13 +34,13 @@ afterAll(async () => {
   await mongoose.connection.close(true);
 });
 
-global.signIn = async () => {
-    const response = await request(app)
-        .post('/api/users/signup')
-        .set('Accept', 'application/json')
-        .expect('Content-Type', /json/)
-        .send({...user})
-        .expect(201);
+global.signIn = () => {
+    const token = jwt.sign({id: '1', email: 'test@test.com'}, process.env.JWT_KEY!);
+    const session = {jwt: token};
+    const sessionJson = JSON.stringify(session);
+    const base64 = Buffer.from(sessionJson).toString('base64');
 
-        return response.get('Set-Cookie');
+    return [
+        `session=${base64}; path=/; httponly`
+      ];
 }

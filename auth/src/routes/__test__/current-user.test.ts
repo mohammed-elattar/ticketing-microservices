@@ -4,7 +4,7 @@ import app from '../../app';
 describe('POST /api/users/current-user', function() {
     it('responds with details about the current user', async function() {
         const cookie = await global.signIn()
-        
+        console.log(cookie);
         const response = await request(app)
         .get('/api/users/currentuser')
         .set('Accept', 'application/json')
