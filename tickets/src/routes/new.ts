@@ -1,6 +1,7 @@
 import { requestValidate, requireAuth } from '@mseel3ttar/common';
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
+import { Ticket } from '../models/tickets';
 
 const createTicketRouter = express.Router();
 
@@ -14,7 +15,16 @@ createTicketRouter.post(
     ,
     requestValidate,
     async (req: Request, res: Response) => {
-        res.sendStatus(200);
+        const {title, price} = req.body;
+        const ticket = Ticket.build({
+            title,
+            price,
+            userId: req.currentUser!.id
+        })
+
+        await ticket.save();
+
+        res.status(201).send(ticket);
     });
 
 export default createTicketRouter;
